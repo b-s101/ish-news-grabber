@@ -12,8 +12,9 @@ $proxy_port = ;
 //Timezone (refer PHP docs for more)
 date_default_timezone_set("Europe/Berlin");
 
-//turn debug on or off
-$debug = false;
+//turn curl debuggin on or off (true=on, false=off)
+$curl_debug = false;
+$curl_debug_url = 'https://www.is-handel.net/content/element/00000061.asp?eo=frmAccountName='.$ish_user.'&action=11&NewsChannelId=2';
 
 // IS News Handel settings
 //------------------------

@@ -1,8 +1,12 @@
 <?php
 include_once __DIR__.'/include/functions.php';
 include_once __DIR__.'/include/config.php';
-if ($debug) {
-	error_reporting(E_ALL);
+
+unlink('ish_test.html');
+
+if ($curl_debug) {
+	ob_start();  
+	$dbg_out = fopen('php://output', 'w');
 }
 
 //fetching website content
@@ -27,42 +31,64 @@ if ($use_proxy) {
 }
 curl_setopt($ch, CURLOPT_COOKIEJAR, 'cookie.txt');
 curl_setopt($ch, CURLOPT_COOKIEFILE, 'cookie.txt');
+if ($curl_debug) {
+	curl_setopt($ch, CURLOPT_VERBOSE, true);
+	curl_setopt($ch, CURLOPT_STDERR, $dbg_out); 
+}
 $postResult = curl_exec($ch);
 
-//fetching content
+if ($curl_debug) {
+	fclose($dbg_out);  
+	$debug_entries = ob_get_clean();
+	echo '<b>debug is on</b><br>';
+	echo '---cURL output---<br>';
+	echo '<pre>'.$debug_entries.'</pre>';
+	curl_setopt($ch, CURLOPT_URL, $curl_debug_url);
+	$curl_response = curl_exec($ch);
+	file_put_contents('ish_test.html',$curl_response);
+	
+	echo '---cURL Info---<br>';
+	$code = curl_getinfo($ch);
+	echo '<pre>';
+		print_r($code);
+	echo '</pre>';
+	echo '---Website fetched before parsing HTML---<br>';
+	echo '<iframe src="ish_test.html" width=100% height=100%></iframe>';
+}else{
+	//fetching content
 
-echo '<b>HOT NEWS</b><br>';
-curl_setopt($ch, CURLOPT_URL, $ish_hotnews_url);
-$hotnews_data = curl_exec($ch);
-//reworking data
-$rows = parseTable($hotnews_data);
-foreach($rows as $row) {
-	echo get_str(DOMinnerHTML($row),'strong').'<br>';
+	echo '<b>HOT NEWS</b><br>';
+	curl_setopt($ch, CURLOPT_URL, $ish_hotnews_url);
+	$hotnews_data = curl_exec($ch);
+	//reworking data
+	$rows = parseTable($hotnews_data);
+	foreach($rows as $row) {
+		echo get_str(DOMinnerHTML($row),'strong').'<br>';
+	}
+	echo '<b>EVA</b><br>';
+	curl_setopt($ch, CURLOPT_URL, $ish_evanews_url);
+	$eva_data = curl_exec($ch);
+	//reworking data
+	$rows = parseTable($eva_data);
+	foreach($rows as $row) {
+		echo get_str(DOMinnerHTML($row),'strong').'<br>';
+	}
+	echo '<b>ODIS</b><br>';
+	curl_setopt($ch, CURLOPT_URL, $ish_odisnews_url);
+	$odis_data = curl_exec($ch);
+	//reworking data
+	$rows = parseTable($odis_data);
+	foreach($rows as $row) {
+		echo get_str(DOMinnerHTML($row),'strong').'<br>';
+	}
+	echo '<b>CROSS</b><br>';
+	curl_setopt($ch, CURLOPT_URL, $ish_crossnews_url);
+	$cross_data = curl_exec($ch);
+	//reworking data
+	$rows = parseTable($cross_data);
+	foreach($rows as $row) {
+		echo get_str(DOMinnerHTML($row),'strong').'<br>';
+	}
 }
-echo '<b>EVA</b><br>';
-curl_setopt($ch, CURLOPT_URL, $ish_evanews_url);
-$eva_data = curl_exec($ch);
-//reworking data
-$rows = parseTable($eva_data);
-foreach($rows as $row) {
-	echo get_str(DOMinnerHTML($row),'strong').'<br>';
-}
-echo '<b>ODIS</b><br>';
-curl_setopt($ch, CURLOPT_URL, $ish_odisnews_url);
-$odis_data = curl_exec($ch);
-//reworking data
-$rows = parseTable($odis_data);
-foreach($rows as $row) {
-	echo get_str(DOMinnerHTML($row),'strong').'<br>';
-}
-echo '<b>CROSS</b><br>';
-curl_setopt($ch, CURLOPT_URL, $ish_crossnews_url);
-$cross_data = curl_exec($ch);
-//reworking data
-$rows = parseTable($cross_data);
-foreach($rows as $row) {
-	echo get_str(DOMinnerHTML($row),'strong').'<br>';
-}
-
 curl_close($ch);
 ?>
