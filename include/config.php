@@ -13,7 +13,7 @@ $proxy_port = '';
 date_default_timezone_set("Europe/Berlin");
 
 //turn curl debuggin on or off (true=on, false=off)
-$curl_debug = true;
+$curl_debug = false;
 $curl_debug_url = 'https://www.is-handel.net/content/element/00000061.asp?eo=frmAccountName='.$ish_user.'&action=11&NewsChannelId=2';
 
 // IS News Handel settings
