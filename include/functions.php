@@ -37,8 +37,14 @@ function DOMinnerHTML(DOMNode $element) {
 function get_str($string, $tag) {
 	$content ="/<$tag>(.*?)<\/$tag>/";
 	preg_match($content, $string, $text);
-	return $text[1];
+	if (!$debug) {
+		return $text[1];
+	}
 }
 
-
+//debug
+function dbg($in) {
+	if ($debug) {
+	}
+}
 ?>

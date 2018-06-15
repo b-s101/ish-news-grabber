@@ -12,6 +12,9 @@ $proxy_port = ;
 //Timezone (refer PHP docs for more)
 date_default_timezone_set("Europe/Berlin");
 
+//turn debug on or off
+$debug = false;
+
 // IS News Handel settings
 //------------------------
 //valid username at is-handel.net

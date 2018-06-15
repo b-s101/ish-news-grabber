@@ -1,11 +1,15 @@
 <?php
 include_once __DIR__.'/include/functions.php';
 include_once __DIR__.'/include/config.php';
+if ($debug) {
+	error_reporting(E_ALL);
+}
 
 //fetching website content
 
 //performing login
 $ch = curl_init();
+curl_setopt($ch, CURLOPT_FRESH_CONNECT, TRUE);
 curl_setopt($ch, CURLOPT_URL, $ish_loginurl);
 curl_setopt($ch,CURLOPT_USERAGENT,$ish_useragent);
 curl_setopt($ch, CURLOPT_POST, 1 );
@@ -60,7 +64,5 @@ foreach($rows as $row) {
 	echo get_str(DOMinnerHTML($row),'strong').'<br>';
 }
 
-
 curl_close($ch);
-
 ?>
