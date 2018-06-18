@@ -46,7 +46,35 @@ if ($curl_debug) {
 	curl_setopt($ch, CURLOPT_URL, $curl_debug_url);
 	$curl_response = curl_exec($ch);
 	file_put_contents('ish_test.html',$curl_response);
-	
+	if ($debug_show_config) {
+		echo '---Configuration---<br>';
+		echo '$use_proxy: ';
+			If ($use_proxy) {
+				echo 'true<br>';
+			}else{
+				echo 'false<br>';
+			}
+		echo '$proxy_login: '.$proxy_login.'<br>';
+		echo '$proxy_host: '.$proxy_host.'<br>';
+		echo '$proxy_port: '.$proxy_port.'<br>';
+		echo '$curl_debug: ';
+			If ($curl_debug) {
+				echo 'true<br>';
+			}else{
+				echo 'false<br>';
+			}
+		echo '$curl_debug_url: '.$curl_debug_url.'<br>';
+		echo '$debug_show_config: ';
+			If ($debug_show_config) {
+				echo 'true<br>';
+			}else{
+				echo 'false<br>';
+			}
+		echo '$ish_user: '.$ish_user.'<br>';
+		echo '$ish_passw: '.$ish_passw.'<br>';
+		echo '$ish_loginurl: '.$ish_loginurl.'<br>';
+		echo '$ish_postdata: '.$ish_postdata.'<br>';
+	}		
 	echo '---cURL Info---<br>';
 	$code = curl_getinfo($ch);
 	echo '<pre>';

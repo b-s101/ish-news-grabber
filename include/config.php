@@ -1,7 +1,7 @@
 <?php
 
 //false = don't use proxy server, true = use proxy server
-$use_proxy = true;
+$use_proxy = false;
 //your proxy login and password here (user:password)
 $proxy_login = '';
 //proxy IP/hostname
@@ -15,13 +15,15 @@ date_default_timezone_set("Europe/Berlin");
 //turn curl debuggin on or off (true=on, false=off)
 $curl_debug = false;
 $curl_debug_url = 'https://www.is-handel.net/content/element/00000061.asp?eo=frmAccountName='.$ish_user.'&action=11&NewsChannelId=2';
+///the following will dump this config including passwords
+$debug_show_config = false;
 
 // IS News Handel settings
 //------------------------
 //valid username at is-handel.net
 $ish_user = '';
-//corresponding password for is-handel.net user
-$ish_passw = '';
+//corresponding password for is-handel.net user (the "" are there on purpose!)
+$ish_passw = "";
 //content URL
 $ish_hotnews_url = 'https://www.is-handel.net/content/element/00000061.asp?eo=frmAccountName='.$ish_user.'&action=11&NewsChannelId=2';
 $ish_evanews_url = 'https://www.is-handel.net/content/element/00000061.asp?eo=frmAccountName='.$ish_user.'&action=11&NewsChannelId=11';
