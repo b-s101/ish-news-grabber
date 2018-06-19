@@ -12,12 +12,6 @@ $proxy_port = "";
 //Timezone (refer PHP docs for more)
 date_default_timezone_set("Europe/Berlin");
 
-//turn curl debuggin on or off (true=on, false=off)
-$curl_debug = false;
-$curl_debug_url = "https://www.is-handel.net/content/element/00000061.asp?eo=frmAccountName=".$ish_user."&action=11&NewsChannelId=2";
-///the following will dump this config including passwords
-$debug_show_config = false;
-
 // IS News Handel settings
 //------------------------
 //valid username at is-handel.net
@@ -35,5 +29,11 @@ $ish_loginurl = "https://www.is-handel.net/content/element/00000046.asp?eo=&s_et
 $ish_postdata = "frmAccountName=".$ish_user."&frmAccountPassword=".$ish_passw."&frmAction12=Anmelden";
 //user agent to use
 $ish_useragent = "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)";
+
+//turn debugging on or off (true=on, false=off)
+$curl_debug = false;
+$curl_debug_url = $ish_hotnews_url;
+///the following will dump this config including passwords
+$debug_show_config = false;
 
 ?>
