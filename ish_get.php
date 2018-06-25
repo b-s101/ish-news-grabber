@@ -90,33 +90,29 @@ if ($curl_debug) {
 	$hotnews_data = curl_exec($ch);
 	//reworking data
 	$rows = parseTable($hotnews_data);
-	foreach($rows as $row) {
-		echo get_str(DOMinnerHTML($row),'strong').'<br>';
-	}
+	ish_strip_html_table($rows);
+
 	echo '<b>EVA</b><br>';
 	curl_setopt($ch, CURLOPT_URL, $ish_evanews_url);
 	$eva_data = curl_exec($ch);
 	//reworking data
 	$rows = parseTable($eva_data);
-	foreach($rows as $row) {
-		echo get_str(DOMinnerHTML($row),'strong').'<br>';
-	}
+	ish_strip_html_table($rows);
+	
 	echo '<b>ODIS</b><br>';
 	curl_setopt($ch, CURLOPT_URL, $ish_odisnews_url);
 	$odis_data = curl_exec($ch);
 	//reworking data
 	$rows = parseTable($odis_data);
-	foreach($rows as $row) {
-		echo get_str(DOMinnerHTML($row),'strong').'<br>';
-	}
+	ish_strip_html_table($rows);
+	
 	echo '<b>CROSS</b><br>';
 	curl_setopt($ch, CURLOPT_URL, $ish_crossnews_url);
 	$cross_data = curl_exec($ch);
 	//reworking data
 	$rows = parseTable($cross_data);
-	foreach($rows as $row) {
-		echo get_str(DOMinnerHTML($row),'strong').'<br>';
-	}
+	ish_strip_html_table($rows);
+
 }
 curl_close($ch);
 ?>
